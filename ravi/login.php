@@ -1,69 +1,55 @@
-<!DOCTYPE HTML>
-<html>
- <head>
-  <meta charset="utf-8">
-  <title>Вход</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-<script src="https://bootstraptema.ru/plugins/2015/b-v3-3-6/bootstrap.min.js"></script>
-<script src="https://bootstraptema.ru/plugins/2016/validator/validator.min.js"></script>
-
-</head>
-
 <?php
-include_once("header.php");
-?>
+    //  вся процедура работает на сессиях. Именно в ней хранятся данные  пользователя, пока он находится на сайте. Очень важно запустить их в  самом начале странички!!!
+    session_start();
+    ?>
+    <html>
+    <head>
+    <title>Авторизация</title>
+    </head>
+    <body>
+    <h2>Авторизация</h2>
+    <form action="functions/testreg.php" method="post">
+
+    <!--****  testreg.php - это адрес обработчика. То есть, после нажатия на кнопку  "Войти", данные из полей отправятся на страничку testreg.php методом  "post" ***** -->
+ <p>
+    <label>Ваш логин:<br></label>
+    <input name="login" type="text" size="15" maxlength="15">
+    </p>
+
+
+    <!--**** В текстовое поле (name="login" type="text") пользователь вводит свой логин ***** -->
  
- <body>
-    <div class="container">
-        <div class="row">
-            <div class="col-sm">
-                <img src="http://www.planetatour19.ru/static/one/images/recreations.png" alt="foto" style="width: 100%">
-            </div>
-        </div>
-       <div class="row">
-        <div class="col-3"></div>
-         <div class="col-6" style="float: center">
-         <form data-toggle="validator">
-  	  <div class="form-group">
-    	   <label for="inputName" class="col-xs-2 control-label">Ваше имя</label>
-    	   <div class="col-xs-4">
-      	    <input type="text" class="form-control" id="inputName" placeholder="Введите имя" required minlength="4">
-    	   </div>
-  	  </div>
-  	  <div class="form-group">
-    	   <label for="inputPassword" class="col-xs-2 control-label">Пароль:</label>
-    	   <div class="col-xs-4">
-      	    <input type="password" data-toggle="validator" data-minlength="6" class="form-control" id="inputPassword" placeholder="Введите пароль" required minlength="5">
-    	   </div>
- 	  </div>
-  	  <div class="form-group">
-    	   <label for="inputPassword2" class="col-xs-2 control-label">Повторите пароль:</label>
-    	   <div class="col-xs-4">
-      	     <input type="password" class="form-control" id="inputPasswordConfirm" data-match="#inputPassword" data-match-error="Ошибка! Пароли не совпадают!" placeholder="Повторите пароль" required minlength="5">
-             <div class="help-block with-errors"></div>
-    	   </div>
- 	  </div>
-  	  <div class="form-group">
-    	   <div class="col-xs-offset-2 col-xs-4">
-      	    <div class="checkbox">
- <label>
- <input type="checkbox" id="terms" data-error="Прежде чем оправить данные" required>
- Докажите что Вы человек
- </label>
- <div class="help-block with-errors"></div>
- </div>
-    	   </div>
-          </div>
-  	  <div class="form-group">
-    	   <div class="text-center">
-      	    <button type="submit" class="btn btn-primary btn-lg">Войти</button>
-    	   </div>
-  	  </div>
-	 </form>
-	</div>
-     <div class="col-3"></div>
-    </div>
-   </div>
-  </div>
- </body>
-</html>
+    <p>
+
+    <label>Ваш пароль:<br></label>
+    <input name="password" type="password" size="15" maxlength="15">
+    </p>
+
+    <!--**** В поле для паролей (name="password" type="password") пользователь вводит свой пароль ***** --> 
+
+    <p>
+    <input type="submit" name="submit" value="Войти">
+
+    <!--**** Кнопочка (type="submit") отправляет данные на страничку testreg.php ***** --> 
+<br>
+ <!--**** ссылка на регистрацию, ведь как-то же должны гости туда попадать ***** --> 
+<a href="register.php">Зарегистрироваться</a> 
+    </p></form>
+    <br>
+    <?php
+    // Проверяем, пусты ли переменные логина и id пользователя
+    if (empty($_SESSION['login']) or empty($_SESSION['id']))
+    {
+    // Если пусты, то мы не выводим ссылку
+    echo "Вы вошли на сайт, как гость<br><a href='#'>Эта ссылка  доступна только зарегистрированным пользователям</a>";
+    }
+    else
+    {
+
+    // Если не пусты, то мы выводим ссылку
+    echo "Вы вошли на сайт, как ".$_SESSION['login']."<br><a  href='index.php'>Эта ссылка доступна только  зарегистрированным пользователям</a>";
+    $_SESSION['login'] = $_POST['login'];
+    }
+    ?>
+    </body>
+    </html>
