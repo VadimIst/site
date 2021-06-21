@@ -1,13 +1,3 @@
-<?php
-// ПОДКЛЮЧЕНИЕ К БД
-$conn = mysqli_connect("localhost", "root", "", "site");
-if (!$conn) {
-  die("Ошибка: " . mysqli_connect_error());
-}
-
-$sql = "SELECT * FROM post";
-?>
-
 <html>
 <body>
 <div class="col-3">
@@ -15,9 +5,10 @@ $sql = "SELECT * FROM post";
    	<?php 
    	if($result = $conn->query($sql)){
    	foreach ($result as $article): ?>
-   		<li><a href="?date="><?= $article['Published_date'] ?> <?= $article['Title'] ?> </a></li>
+   		<li><a class='text' href="news.php?id=<?= $article['id'] ?>"><?= $article['Published_date'] ?> <?= $article['Title'] ?> </a></li>
    		<?php endforeach; }?>
    </ul>
    </div>
 </body>
 </html>
+

@@ -38,7 +38,7 @@ include_once("../header.php");
   <?php
     if($result = $conn->query($sql)){
       foreach($result as $row){   
-        if ($row['id']=='3'){        
+        if ($row['id']=='1'){        
           echo "<div class=col>";
           echo "<h1>" . $row["Title"] . "</h1>";
           echo "<img src=" . $row["Foto"] . " alt=foto align=left hspace=10 width=250 height=250>";

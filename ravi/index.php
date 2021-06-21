@@ -1,7 +1,7 @@
 <?php
 //require_once "functions/functions.php";
 //require_once "functions/connect.php";
-
+session_start();
 // ПОДКЛЮЧЕНИЕ К БД
 $conn = mysqli_connect("localhost", "root", "", "site");
 if (!$conn) {
@@ -18,7 +18,7 @@ include_once("header.php");
  <head>
   <meta charset="utf-8">
   <title>Bootstrap</title>
-  <link rel="stylesheet" type="text/css" href="/css/style.css">
+  <link rel="stylesheet" href="css/style.css">
  </head>
   <body>
     <div class="container">
@@ -28,45 +28,37 @@ include_once("header.php");
             </div>
         </div>
         <div class="row">
-            <!-- <div class="col-3">
-                <ul class="list-group">
-                    <li class="list-group-item"> <a href="#">2021 Март</a></li>
-                    <li class="list-group-item"> <a href="#">2021 Февраль</a></li>
-                    <li class="list-group-item"> <a href="#">2021 Январь</a></li>
-                    <li class="list-group-item"> <a href="#">2020 Декабрь</a></li>
-                    <li class="list-group-item"> <a href="#">2020 Ноябрь</a></li>
-                    <li class="list-group-item"> <a href="#">2020 Октябрь</a></li>
-                    <li class="list-group-item"> <a href="#">2020 Сентябрь</a></li>
-                </ul> 
-
-        <ul class="list-group">
-        <?php 
-        if($result = $conn->query($sql)){
-        foreach ($result as $article): ?>
-            <li><a href="?date="><?= $article['Published_date'] ?> <?= $article['Title'] ?> </a></li>
-            <?php endforeach; }?>
-        </ul>
-        </div> -->
-<?php
-        include_once("bok.php");
-?>
+           
         <?php
-        if($result = $conn->query($sql)){
-            foreach($result as $row){   
-            echo "<div class=col>";
-            echo "<h1>" . $row["Title"] . "</h1>";
-            echo "<img src=" . $row["Foto"] . " alt=foto align=left hspace=10 width=250 height=250>";
-            echo "<p align=justify>" . $row["Intro"] . "</p>";
-            echo "<p style=float:left><b>Date: " . $row["Published_date"] . " autor: Andrey</b></p>";
-            echo "<a style=float:right href=com/zima.php role=button class='btn btn-info' target=_blank>Читать дальше</a></div>";
-            echo "<div class=w-100></div><div class=col-3></div>";
-        }
-        }   
+            include_once("bok.php");
         ?>
+        <?php 
+        foreach ($result as $row) : ?>
+        <div class=col>
+            <h1><?= $row['Title']?></h1>
+            <img src= "<?= $row['Foto']?>" alt="foto" align="left" hspace=10 width=250 height=250>
+            <div><?= $row['Intro']?></div>
+            <b>Автор: <?= $row['autor']?> Дата написания: <?= $row['Published_date']?></b>
+            <div><button class="button"><a class="button" href="news.php?id=<?= $row['id'] ?>">Читать далее...</a></button></div>
+        </div>
+        <div class=w-100></div>
+        <div class=col-3></div>
+        <?php endforeach; ?>
         </div>
     </div>
  </body>
 </html>
+
+<!-- <?php
+if (isset($_SESSION['login'])){
+    echo "yes";
+}
+else {
+    session_destroy();
+    echo "no";
+}
+?>  -->
+
 <?php
 $conn->close();
 ?>

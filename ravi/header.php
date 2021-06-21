@@ -5,9 +5,10 @@
         <div class="row">
             <div class="col">
                 <nav class="nav">
-                    <a class="nav-link active" aria-current="page" href="index.php">Главная</a>
-                    <a class="nav-link" href="login.php">Авторизация</a>
-                    <a class="nav-link" href="register.php">Регистрация</a>
+                    <a class="nav-link active" aria-current="page" target="_blank" href="index.php">Главная</a>
+                    <a class="nav-link" target="_blank" href="login.php">Авторизация</a>
+                    <a class="nav-link" target="_blank" href="register.php">Регистрация</a>
+                    <a class="nav-link" target="_blank" href="kabinet.php">Личный кабинет</a>
                 </nav>
             </div>
         </div>
