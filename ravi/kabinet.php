@@ -54,6 +54,7 @@ include_once("header.php");
 				</div>
 			   <div class="col-6">    
 				<form action="functions/predlog.php" method="post" name="form">
+					<b>Предложение поста</b></br>
 					<input type="hidden" name="autor" value="<?= $_SESSION['login']?>" />
 					<input type="text" name="Title" placeholder="Введите название статьи" size="30"></br>
 					<input type="text" name="Intro" placeholder="Введите интро к посту" size="30">

@@ -26,3 +26,23 @@
     float: right;
  }
 
+.icon_head {
+    height: 15px;
+    width: 15px;
+    cursor: pointer;
+}
+.noClick {
+    pointer-events: none; /* делаем элемент некликабельным */
+}
+
+.brd {
+    border: 4px double black; /* Параметры границы */
+    background: #FFFAFA; /* Цвет фона */
+    padding: 10px; /* Поля вокруг текста */
+   }
+
+.brd2 {
+    border: 1px double black; /* Параметры границы */
+    background: #FFFAFA; /* Цвет фона */
+    padding: 10px; /* Поля вокруг текста */
+}

@@ -57,8 +57,22 @@ $page_id = $article['id']; // Уникальный идентификатор с
 			</div>
 		</div>
 
+<!-- <form action="functions/like.php" method="post" name="form">
+<input type="hidden" name="str_id" value="<?= $row['id']?>" />
+</form>
+<script type="text/javascript" src="js/like.js"></script>;
+<?php
+include_once("functions/like.php");
 
-
+$likesArr = quantityLikes($article['id']); // в функцию quantityLikes мы передаём ID текущего поста. В моём блоге - это $post['id']. В Вашем это будет другое значение
+$likes = count($likesArr); // считаем лайки с помощью подсчёта общего значения количества элементов массива
+?>
+<? if(!is_in_array($likesArr, 'client_ip', $_SERVER['REMOTE_ADDR'])): ?>
+<i title="Оцените пост"><img src="путь_на_иконку_для_новых_пользователей" class="icon_head" alt="" data-ip="<?=$_SERVER['REMOTE_ADDR']?>" data-post="<?=$post['id']?>"></i> <span id="countLikes"><?=$likes?></span>
+<? else : ?>
+<i title="Вы уже оценили данный пост"><img src="путь_на_иконку_для_уже_проголосовавших_ранее" class="icon_head noClick" alt=""></i> <span id="countLikes"><?=$likes?></span>
+<? endif; ?>
+ -->
 	<div class="row">
 			<div class=col-3>
 			</div>
@@ -117,8 +131,10 @@ if($result = $conn->query($sql)){
 			$result_set = $conn->query("SELECT * FROM `comment` WHERE `page_id`= '$page_id' "); //Вытаскиваем все комментарии для данной страницы
 			//Вывод комментариев
 			while ($row = $result_set->fetch_assoc()) { ?>
+				<div class='brd'>
 				<h1><?= $row['autor']?></h1>
-				<p><?= $row['text']?></p>
+				<div class='brd2'><p><?= $row['text']?></p></div>
+				</div>
 			    <br> </br>
 			<?php } ?>
 			</div>
